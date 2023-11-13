@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "Vista": {
+      "commandName": "Project",
+      "remoteDebugEnabled": false
+    }
+  }
+}
