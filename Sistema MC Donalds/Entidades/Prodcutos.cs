@@ -9,6 +9,7 @@ namespace Entidades
     {
         private int id;
         private string nombre;
+        private string ingredientes;
         private double precio;
         private bool vegano;
         private static List<Producto> productos;
@@ -19,16 +20,18 @@ namespace Entidades
             Producto.productos = new List<Producto>();
         }
 
-        public Producto(int id, string nombre, double precio, bool vegano)
+        public Producto(int id, string nombre, string ingredientes ,double precio, bool vegano)
         {
             this.id = id;
             this.nombre = nombre;
+            this.ingredientes = ingredientes;
             this.precio = precio;
             this.vegano = vegano;
         }
 
         public string Nombre { get { return this.nombre; } }
         public  double Precio { get { return this.precio; } }
+        public  string Ingredientes { get { return this.ingredientes; } }
         public int Id { get { return this.id; } }
 
         public static List<Producto> Productos { get { return productos; } }
@@ -53,10 +56,11 @@ namespace Entidades
                         {
                             int id = reader.GetInt32(0);
                             string nombre = reader.GetString(1);
-                            double precio = reader.GetDouble(2);
-                            bool vegano = reader.GetBoolean(3);
+                            string? ingredientes = reader.GetString(2);
+                            double precio = reader.GetDouble(3);
+                            bool vegano = reader.GetBoolean(4);
 
-                            Producto producto = new Producto(id, nombre, precio, vegano);
+                            Producto producto = new Producto(id, nombre, ingredientes , precio, vegano);
                             Producto.productos.Add(producto);
                         }
                     }

@@ -13,7 +13,7 @@ namespace Vista
         public Form1()
         {
             InitializeComponent();
-            
+
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -43,7 +43,7 @@ namespace Vista
                 button.Width = 100;
 
                 flowLayoutPanelProductos.Controls.Add(button);
-                InitializeToolTip(producto,button);
+                InitializeToolTip(producto, button);
 
             }
 
@@ -51,12 +51,16 @@ namespace Vista
             this.Controls.Add(groupBoxProductos);
         }
 
-        private void InitializeToolTip(Producto producto,Button button)
+        private void InitializeToolTip(Producto producto, Button button)
         {
             toolTip = new ToolTip();
 
-            // Agregar la lista de ingredientes a la base de datos de productos
-            toolTip.SetToolTip(button, $"{producto.Nombre}");
+            StringBuilder sb = new StringBuilder();
+
+            sb.AppendLine("Precio: $" + producto.Precio.ToString());
+            sb.Append("Ingredientes: " + producto.Ingredientes);
+
+            toolTip.SetToolTip(button, $"{sb}");
         }
 
 
@@ -106,7 +110,7 @@ namespace Vista
 
 
             Label labelTotal = new Label();
-            labelTotal.Text = $"Total: {Math.Round(orden.GetTotal,2)}";
+            labelTotal.Text = $"Total: {Math.Round(orden.GetTotal, 2)}";
             labelTotal.Width = flowLayoutPanelOrden.Width;
             labelTotal.Anchor = AnchorStyles.Bottom;
 
@@ -124,6 +128,12 @@ namespace Vista
             flowLayoutPanelOrden.Controls.Clear();
             orden.GetOrden.Clear();
             orden.ResetTotal();
+        }
+
+        private void btnCargarOrden_Click(object sender, EventArgs e)
+        {
+            // Tengo que crear las queris para guardar en orden y en detalle orden 
+
         }
     }
 }

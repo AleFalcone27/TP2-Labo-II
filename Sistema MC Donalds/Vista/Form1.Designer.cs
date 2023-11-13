@@ -90,6 +90,7 @@
             btnCargarOrden.TabIndex = 4;
             btnCargarOrden.Text = "Cargar";
             btnCargarOrden.UseVisualStyleBackColor = true;
+            btnCargarOrden.Click += btnCargarOrden_Click;
             // 
             // Form1
             // 
