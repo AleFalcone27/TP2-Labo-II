@@ -1,0 +1,25 @@
+CREATE TABLE Orden (
+    OrdenID INT PRIMARY KEY,
+    FechaPedido DATE,
+    NombreCliente NVARCHAR(255) 
+);
+
+
+CREATE TABLE DetalleOrden (
+    DetalleID INT PRIMARY KEY,
+    OrdenID INT,
+    NombreProducto NVARCHAR(255),
+    Cantidad INT,
+    FOREIGN KEY (OrdenID) REFERENCES Orden(OrdenID)
+);
+
+
+CREATE table Productos(
+
+Id INT PRIMARY KEY IDENTITY(1,1),
+Nombre VARCHAR(50),
+Ingredientes VARCHAR(100),
+Precio FLOAT,
+Vegano BIT,
+
+)

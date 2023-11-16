@@ -1,0 +1,16 @@
+AVANCES
+
+- Utilice FlowLayoutPanel
+
+- Generacion dinamica de botones
+
+- Los productos se obtienen con una query de la base de datos y se cargan en el form 
+
+- El tamaño del fomulario esta fijo pero la carga de los botones es responsive 
+
+- Los los levanto de la base de datos 
+
+- implementacion de Tooltip para la preview de los productos
+
+
+
