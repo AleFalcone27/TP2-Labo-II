@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\aleef\\OneDrive\\Escritorio\\2do Cuatri\\TP2-Labo-II\\Sistema MC Donalds\\Entidades\\Entidades.csproj": {}
+    "C:\\Users\\aleef\\OneDrive\\Escritorio\\2do Cuatri\\TP2-Labo-II\\Integrador\\Entidades\\Entidades.csproj": {}
   },
   "projects": {
-    "C:\\Users\\aleef\\OneDrive\\Escritorio\\2do Cuatri\\TP2-Labo-II\\Sistema MC Donalds\\Entidades\\Entidades.csproj": {
+    "C:\\Users\\aleef\\OneDrive\\Escritorio\\2do Cuatri\\TP2-Labo-II\\Integrador\\Entidades\\Entidades.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\aleef\\OneDrive\\Escritorio\\2do Cuatri\\TP2-Labo-II\\Sistema MC Donalds\\Entidades\\Entidades.csproj",
+        "projectUniqueName": "C:\\Users\\aleef\\OneDrive\\Escritorio\\2do Cuatri\\TP2-Labo-II\\Integrador\\Entidades\\Entidades.csproj",
         "projectName": "Entidades",
-        "projectPath": "C:\\Users\\aleef\\OneDrive\\Escritorio\\2do Cuatri\\TP2-Labo-II\\Sistema MC Donalds\\Entidades\\Entidades.csproj",
+        "projectPath": "C:\\Users\\aleef\\OneDrive\\Escritorio\\2do Cuatri\\TP2-Labo-II\\Integrador\\Entidades\\Entidades.csproj",
         "packagesPath": "C:\\Users\\aleef\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\aleef\\OneDrive\\Escritorio\\2do Cuatri\\TP2-Labo-II\\Sistema MC Donalds\\Entidades\\obj\\",
+        "outputPath": "C:\\Users\\aleef\\OneDrive\\Escritorio\\2do Cuatri\\TP2-Labo-II\\Integrador\\Entidades\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\aleef\\AppData\\Roaming\\NuGet\\NuGet.Config",

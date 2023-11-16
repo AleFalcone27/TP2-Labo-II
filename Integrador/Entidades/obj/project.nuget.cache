@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "6+D29ej2aIS98bH9SbD5Do7sFq1KkJMi9zG7v5A6QHyW1fvKJxBi/UxMUEY9SU0eF2gTzMb9ttdKFnRowcjl/g==",
+  "dgSpecHash": "pnuMj4bqXdWH9iXlcyzKP4toaP2jnhRxGUnYFWuG8ixBzzaiQ8mtvePoByOCX0nFS4dEh1e+4Sc07Njb9fR0jQ==",
   "success": true,
-  "projectFilePath": "C:\\Users\\aleef\\OneDrive\\Escritorio\\2do Cuatri\\TP2-Labo-II\\Sistema MC Donalds\\Entidades\\Entidades.csproj",
+  "projectFilePath": "C:\\Users\\aleef\\OneDrive\\Escritorio\\2do Cuatri\\TP2-Labo-II\\Integrador\\Entidades\\Entidades.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\aleef\\.nuget\\packages\\microsoft.netcore.platforms\\3.1.0\\microsoft.netcore.platforms.3.1.0.nupkg.sha512",
     "C:\\Users\\aleef\\.nuget\\packages\\microsoft.win32.registry\\4.7.0\\microsoft.win32.registry.4.7.0.nupkg.sha512",
