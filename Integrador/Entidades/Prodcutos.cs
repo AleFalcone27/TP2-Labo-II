@@ -1,11 +1,8 @@
-﻿using System.Collections.Generic;
-using System.Data;
-using System.Data.Common;
-using System.Data.SqlClient;
+﻿using System.Data.SqlClient;
 
 namespace Entidades
 {
-    public class Producto : ICondimentos 
+    public class Producto : ICondimentos
     {
         // Campos 
         private string nombre;
@@ -23,7 +20,7 @@ namespace Entidades
             Producto.productos = new List<Producto>();
         }
 
-        public Producto( string nombre, string ingredientes ,double precio, string condimentos, bool vegano)
+        public Producto(string nombre, string ingredientes, double precio, string condimentos, bool vegano)
         {
             this.nombre = nombre;
             this.condimentos = condimentos;
@@ -35,15 +32,22 @@ namespace Entidades
         // Getters & Setters
 
         public string Nombre { get { return this.nombre; } }
-        public  double Precio { get { return this.precio; } }
-        public  string Ingredientes { get { return this.ingredientes; } }
+        public double Precio { get { return this.precio; } }
+
+        public string Condimentos
+        {
+            get { return this.condimentos; }
+            set { this.condimentos = value; }
+        }
+
+
+        public string Ingredientes { get { return this.ingredientes; } }
         public static List<Producto> Productos { get { return productos; } }
 
 
         // Métodos
         public static void GetAndInitializeProducts()
         {
-
             using (SqlConnection connection = new SqlConnection(GestorSql.ConnectionString))
             {
                 try
@@ -61,9 +65,10 @@ namespace Entidades
                             string nombre = reader.GetString(1);
                             string? ingredientes = reader.GetString(2);
                             double precio = reader.GetDouble(3);
-                            bool vegano = reader.GetBoolean(4);
+                            string condimentos = reader.GetString(4);
+                            bool vegano = reader.GetBoolean(5);
 
-                            Producto producto = new Producto(nombre, ingredientes , precio, vegano);
+                            Producto producto = new Producto(nombre, ingredientes, precio, condimentos, vegano);
                             Producto.productos.Add(producto);
                         }
                     }
@@ -76,24 +81,25 @@ namespace Entidades
 
         }
 
-        
+
         public static void insertProducts(Producto producto)
         {
             using (SqlConnection connection = new SqlConnection(GestorSql.ConnectionString))
             {
                 try
                 {
-                    string query = "INSERT INTO Productos (Nombre, Ingredientes, Precio, Vegano) " +
-                          "VALUES (@Nombre, @Ingredientes, @Precio, @Vegano)";
+                    string query = "INSERT INTO Productos (Nombre, Ingredientes, Precio, Condimentos, Vegano) " +
+                          "VALUES (@Nombre, @Ingredientes, @Precio, @Condimentos .@Vegano)";
 
                     SqlCommand command = new SqlCommand(query, connection);
                     command.Parameters.AddWithValue("@Nombre", producto.Nombre);
                     command.Parameters.AddWithValue("@Ingredientes", producto.ingredientes);
                     command.Parameters.AddWithValue("@Precio", producto.precio);
+                    command.Parameters.AddWithValue("@Ingredientes", producto.condimentos);
                     command.Parameters.AddWithValue("@Vegano", producto.vegano);
 
                     connection.Open();
-                    command.ExecuteNonQuery(); 
+                    command.ExecuteNonQuery();
 
                 }
                 catch (Exception ex)
