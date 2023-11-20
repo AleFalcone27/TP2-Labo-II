@@ -12,9 +12,9 @@ namespace Entidades
         private bool vegano;
         private static List<Producto> productos;
 
+        private string condimentosAux;
 
         // Constructores
-
         static Producto()
         {
             Producto.productos = new List<Producto>();
@@ -27,12 +27,19 @@ namespace Entidades
             this.ingredientes = ingredientes;
             this.precio = precio;
             this.vegano = vegano;
+
+            condimentosAux = condimentos;
         }
 
         // Getters & Setters
-
         public string Nombre { get { return this.nombre; } }
         public double Precio { get { return this.precio; } }
+
+        public string CondimentosAux
+        {
+            get { return this.condimentosAux; }
+            set { this.condimentosAux = value; }
+        }
 
         public string Condimentos
         {
@@ -45,8 +52,9 @@ namespace Entidades
         public static List<Producto> Productos { get { return productos; } }
 
 
+
         // Métodos
-        public static void GetAndInitializeProducts()
+        public static bool GetAndInitializeProducts()
         {
             using (SqlConnection connection = new SqlConnection(GestorSql.ConnectionString))
             {
@@ -72,17 +80,20 @@ namespace Entidades
                             Producto.productos.Add(producto);
                         }
                     }
+                    return true;
+
                 }
                 catch (Exception ex)
                 {
                     Console.WriteLine("Error al obtener productos: " + ex.Message);
+                    return false;
                 }
             }
 
         }
 
 
-        public static void insertProducts(Producto producto)
+        public static bool insertProducts(Producto producto)
         {
             using (SqlConnection connection = new SqlConnection(GestorSql.ConnectionString))
             {
@@ -101,24 +112,27 @@ namespace Entidades
                     connection.Open();
                     command.ExecuteNonQuery();
 
+                    return true;
                 }
                 catch (Exception ex)
                 {
-                    Console.WriteLine("Error al obtener productos: " + ex.Message);
+                    Console.WriteLine("Error al guardar el nuevo producto: " + ex.Message);
+                    return false;
                 }
             }
         }
 
 
-        //IMPLEMENTAR UNA LISTA DE CONDIMENTOS PARA PODER QUITAR Y PONERSELOS THIS.CONDIMENTOS
         public void QuitarCondimentos()
         {
             this.ingredientes = string.Empty;
         }
 
+        // CRREAR QUERY PARA OBTENER LOS CONDIMENTOS DE UN PRODUCTO 
+
+
 
         // Sobrecarga de operadores
-
         /// <summary>
         /// Compara entre el nombre de una instancia de Producto y un string
         /// </summary>

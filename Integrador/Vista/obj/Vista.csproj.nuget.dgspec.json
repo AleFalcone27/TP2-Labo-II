@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\aleef\\OneDrive\\Escritorio\\2do Cuatri\\TP2-Labo-II\\Sistema MC Donalds\\Vista\\Vista.csproj": {}
+    "C:\\Users\\aleef\\OneDrive\\Escritorio\\2do Cuatri\\TP2-Labo-II\\Integrador\\Vista\\Vista.csproj": {}
   },
   "projects": {
-    "C:\\Users\\aleef\\OneDrive\\Escritorio\\2do Cuatri\\TP2-Labo-II\\Sistema MC Donalds\\Entidades\\Entidades.csproj": {
+    "C:\\Users\\aleef\\OneDrive\\Escritorio\\2do Cuatri\\TP2-Labo-II\\Integrador\\Entidades\\Entidades.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\aleef\\OneDrive\\Escritorio\\2do Cuatri\\TP2-Labo-II\\Sistema MC Donalds\\Entidades\\Entidades.csproj",
+        "projectUniqueName": "C:\\Users\\aleef\\OneDrive\\Escritorio\\2do Cuatri\\TP2-Labo-II\\Integrador\\Entidades\\Entidades.csproj",
         "projectName": "Entidades",
-        "projectPath": "C:\\Users\\aleef\\OneDrive\\Escritorio\\2do Cuatri\\TP2-Labo-II\\Sistema MC Donalds\\Entidades\\Entidades.csproj",
+        "projectPath": "C:\\Users\\aleef\\OneDrive\\Escritorio\\2do Cuatri\\TP2-Labo-II\\Integrador\\Entidades\\Entidades.csproj",
         "packagesPath": "C:\\Users\\aleef\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\aleef\\OneDrive\\Escritorio\\2do Cuatri\\TP2-Labo-II\\Sistema MC Donalds\\Entidades\\obj\\",
+        "outputPath": "C:\\Users\\aleef\\OneDrive\\Escritorio\\2do Cuatri\\TP2-Labo-II\\Integrador\\Entidades\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\aleef\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -40,9 +40,23 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "dependencies": {
-            "System.Data.SqlClient": {
+            "EntityFramework": {
               "target": "Package",
-              "version": "[4.8.5, )"
+              "version": "[6.4.4, )"
+            },
+            "Microsoft.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[7.0.14, )"
+            },
+            "Microsoft.EntityFrameworkCore.SqlServer": {
+              "target": "Package",
+              "version": "[7.0.14, )"
+            },
+            "Microsoft.EntityFrameworkCore.Tools": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[7.0.14, )"
             }
           },
           "imports": [
@@ -61,18 +75,18 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.402\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.100\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\aleef\\OneDrive\\Escritorio\\2do Cuatri\\TP2-Labo-II\\Sistema MC Donalds\\Vista\\Vista.csproj": {
+    "C:\\Users\\aleef\\OneDrive\\Escritorio\\2do Cuatri\\TP2-Labo-II\\Integrador\\Vista\\Vista.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\aleef\\OneDrive\\Escritorio\\2do Cuatri\\TP2-Labo-II\\Sistema MC Donalds\\Vista\\Vista.csproj",
+        "projectUniqueName": "C:\\Users\\aleef\\OneDrive\\Escritorio\\2do Cuatri\\TP2-Labo-II\\Integrador\\Vista\\Vista.csproj",
         "projectName": "Vista",
-        "projectPath": "C:\\Users\\aleef\\OneDrive\\Escritorio\\2do Cuatri\\TP2-Labo-II\\Sistema MC Donalds\\Vista\\Vista.csproj",
+        "projectPath": "C:\\Users\\aleef\\OneDrive\\Escritorio\\2do Cuatri\\TP2-Labo-II\\Integrador\\Vista\\Vista.csproj",
         "packagesPath": "C:\\Users\\aleef\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\aleef\\OneDrive\\Escritorio\\2do Cuatri\\TP2-Labo-II\\Sistema MC Donalds\\Vista\\obj\\",
+        "outputPath": "C:\\Users\\aleef\\OneDrive\\Escritorio\\2do Cuatri\\TP2-Labo-II\\Integrador\\Vista\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\aleef\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -89,8 +103,8 @@
           "net6.0-windows7.0": {
             "targetAlias": "net6.0-windows",
             "projectReferences": {
-              "C:\\Users\\aleef\\OneDrive\\Escritorio\\2do Cuatri\\TP2-Labo-II\\Sistema MC Donalds\\Entidades\\Entidades.csproj": {
-                "projectPath": "C:\\Users\\aleef\\OneDrive\\Escritorio\\2do Cuatri\\TP2-Labo-II\\Sistema MC Donalds\\Entidades\\Entidades.csproj"
+              "C:\\Users\\aleef\\OneDrive\\Escritorio\\2do Cuatri\\TP2-Labo-II\\Integrador\\Entidades\\Entidades.csproj": {
+                "projectPath": "C:\\Users\\aleef\\OneDrive\\Escritorio\\2do Cuatri\\TP2-Labo-II\\Integrador\\Entidades\\Entidades.csproj"
               }
             }
           }
@@ -104,6 +118,26 @@
       "frameworks": {
         "net6.0-windows7.0": {
           "targetAlias": "net6.0-windows",
+          "dependencies": {
+            "EntityFramework": {
+              "target": "Package",
+              "version": "[6.4.4, )"
+            },
+            "Microsoft.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[7.0.14, )"
+            },
+            "Microsoft.EntityFrameworkCore.SqlServer": {
+              "target": "Package",
+              "version": "[7.0.14, )"
+            },
+            "Microsoft.EntityFrameworkCore.Tools": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[7.0.14, )"
+            }
+          },
           "imports": [
             "net461",
             "net462",
@@ -123,7 +157,7 @@
               "privateAssets": "none"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.402\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.100\\RuntimeIdentifierGraph.json"
         }
       }
     }

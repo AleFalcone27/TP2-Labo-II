@@ -33,7 +33,7 @@ namespace Vista
 
             if (float.TryParse(txtPrecio.Text, out float precio))
             {
-                Producto nuevoProducto = new Producto(txtNombre.Text, txtIngredientes.Text, precio, this.isVegan);
+                Producto nuevoProducto = new Producto(txtNombre.Text, txtIngredientes.Text, precio, txtCondimentos.Text , this.isVegan);
                 Producto.insertProducts(nuevoProducto);
                 MessageBox.Show("Se agrego correcatemnte");
             }

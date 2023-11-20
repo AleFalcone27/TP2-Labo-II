@@ -1,4 +1,5 @@
-﻿using System.Net.Http.Headers;
+﻿using System.Data.SqlClient;
+
 
 namespace Entidades
 {
@@ -15,17 +16,16 @@ namespace Entidades
         public Dictionary<Producto, int> GetOrden
         {
             get { return this.dictOrden; }
-        }
-
-        public Dictionary<Producto, int> SetOrden
-        {
             set { this.dictOrden = value; }
         }
 
-
-        public double GetTotal
+        public double Total
         {
-            get {
+
+            set { this.total = value; } 
+
+            get
+            {
 
                 foreach (var item in this.dictOrden)
                 {
@@ -37,8 +37,8 @@ namespace Entidades
                     {
                         this.total += item.Key.Precio * item.Value;
                     }
-                    
-                    
+
+
                 }
                 return this.total;
             }
@@ -72,6 +72,29 @@ namespace Entidades
             }
         }
 
+        public void insertOrden()
+        {
+            //using (SqlConnection connection = new SqlConnection(GestorSql.ConnectionString))
+            //{
+
+            //    string jsonProductos = JsonConvert.SerializeObject(this.dictOrden); // Convertir el diccionario a formato JSON
+
+            //    string query = "INSERT INTO Orden(FechaPedido, Productos) VALUES(@Fecha, @Productos);";
+
+            //    SqlCommand command = new SqlCommand(query, connection);
+            //    command.Parameters.AddWithValue("@Fecha", DateTime.Now);
+            //    command.Parameters.AddWithValue("@Productos", jsonProductos);
+
+            //    connection.Open();
+            //    command.ExecuteNonQuery();
+
+            //    //PROBAR UNA SERIALIZACION XML Y LUEGO GUARDARLO EN LA TABLA 
+
+            //}
+
+        }
+
+
     }
 
 
@@ -80,6 +103,6 @@ namespace Entidades
 }
 
 
-//INSERT INTO Orden(OrdenID, FechaPedido, OtrosCampos) VALUES(1, '2023-11-11', 'Otros datos de la orden');
+//INSERT INTO Orden(OrdenID, FechaPedido, OtrosCampos) VALUES(1, '2023-11-11', 'Alejo');
 //INSERT INTO DetalleOrden(DetalleID, OrdenID, NombreProducto, Cantidad) VALUES(1, 1, 'Producto A', 5);
 //INSERT INTO DetalleOrden(DetalleID, OrdenID, NombreProducto, Cantidad) VALUES(2, 1, 'Producto B', 10);

@@ -22,3 +22,6 @@ C:\Users\aleef\OneDrive\Escritorio\2do Cuatri\TP2-Labo-II\Integrador\Entidades\b
 C:\Users\aleef\OneDrive\Escritorio\2do Cuatri\TP2-Labo-II\Integrador\Entidades\bin\Debug\net6.0\Entidades.dll
 C:\Users\aleef\OneDrive\Escritorio\2do Cuatri\TP2-Labo-II\Integrador\Entidades\bin\Debug\net6.0\Entidades.pdb
 C:\Users\aleef\OneDrive\Escritorio\2do Cuatri\TP2-Labo-II\Integrador\Entidades\obj\Debug\net6.0\ref\Entidades.dll
+C:\Users\aleef\OneDrive\Escritorio\2do Cuatri\TP2-Labo-II\Integrador\Entidades\obj\Debug\net6.0\Entidades.sourcelink.json
+C:\Users\aleef\OneDrive\Escritorio\2do Cuatri\TP2-Labo-II\Integrador\Entidades\bin\Debug\net6.0\Entidades.runtimeconfig.json
+C:\Users\aleef\OneDrive\Escritorio\2do Cuatri\TP2-Labo-II\Integrador\Entidades\obj\Debug\net6.0\Entidades.genruntimeconfig.cache
