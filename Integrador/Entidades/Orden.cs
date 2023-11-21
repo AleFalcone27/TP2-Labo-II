@@ -1,43 +1,46 @@
 ﻿using System.Data.SqlClient;
+using System.Linq.Expressions;
+using System.Text;
 
 
 namespace Entidades
 {
     public class Orden
     {
-        private Dictionary<Producto, int> dictOrden;
+        private List<Producto> ListOrden;
         private double total;
+        private string nombre;
 
-        public Orden()
+        public Orden(string nombre)
         {
-            this.dictOrden = new Dictionary<Producto, int>();
+            this.ListOrden = new List<Producto>();
+            this.nombre = nombre;
         }
 
-        public Dictionary<Producto, int> GetOrden
+        public List<Producto> GetOrden
         {
-            get { return this.dictOrden; }
-            set { this.dictOrden = value; }
+            get { return this.ListOrden; }
+            set { this.ListOrden = value; }
         }
+
+        public string Nombre
+        {
+            get { return this.nombre; }
+        }
+
 
         public double Total
         {
 
-            set { this.total = value; } 
+            set { this.total = value; }
 
             get
             {
 
-                foreach (var item in this.dictOrden)
+                foreach (var item in this.ListOrden)
                 {
-                    if (item.Value == 1)
-                    {
-                        this.total += item.Key.Precio;
-                    }
-                    else
-                    {
-                        this.total += item.Key.Precio * item.Value;
-                    }
 
+                       this.total += item.Precio;
 
                 }
                 return this.total;
@@ -51,56 +54,129 @@ namespace Entidades
 
         public void AgregarALaOrden(Producto productoAAgregar)
         {
-            if (this.dictOrden.Count == 0)
-            {
 
-                this.dictOrden.Add(productoAAgregar, 1);
-            }
-            else
-            {
 
-                if (this.dictOrden.ContainsKey(productoAAgregar))
-                {
+            this.ListOrden.Add(productoAAgregar);
 
-                    int cantItems = this.dictOrden[productoAAgregar];
-                    this.dictOrden[productoAAgregar] = cantItems + 1;
-                }
-                else
-                {
-                    this.dictOrden.Add(productoAAgregar, 1);
-                }
-            }
-        }
-
-        public void insertOrden()
-        {
-            //using (SqlConnection connection = new SqlConnection(GestorSql.ConnectionString))
+            //if (this.dictOrden.Count == 0)
             //{
 
-            //    string jsonProductos = JsonConvert.SerializeObject(this.dictOrden); // Convertir el diccionario a formato JSON
-
-            //    string query = "INSERT INTO Orden(FechaPedido, Productos) VALUES(@Fecha, @Productos);";
-
-            //    SqlCommand command = new SqlCommand(query, connection);
-            //    command.Parameters.AddWithValue("@Fecha", DateTime.Now);
-            //    command.Parameters.AddWithValue("@Productos", jsonProductos);
-
-            //    connection.Open();
-            //    command.ExecuteNonQuery();
-
-            //    //PROBAR UNA SERIALIZACION XML Y LUEGO GUARDARLO EN LA TABLA 
-
+            //    this.dictOrden.Add(productoAAgregar, 1);
             //}
+            //else
+            //{
 
+            //    if (this.dictOrden.ContainsKey(productoAAgregar))
+            //    {
+
+            //        int cantItems = this.dictOrden[productoAAgregar];
+            //        this.dictOrden[productoAAgregar] = cantItems + 1;
+            //    }
+            //    else
+            //    {
+            //        this.dictOrden.Add(productoAAgregar, 1);
+            //    }
+            //}
         }
 
 
-    }
+        //    public void InsertarOrden()
+        //    {
+        //        using (SqlConnection connection = new SqlConnection(GestorSql.ConnectionString))
+        //        {
+        //            try
+        //            {
+        //                connection.Open();
+
+        //                string queryInsertOrden = "INSERT INTO Orden(FechaPedido, NombreCliente) VALUES(@Fecha, @NombreCliente); SELECT SCOPE_IDENTITY();";
+        //                SqlCommand cmdInsertOrden = new SqlCommand(queryInsertOrden, connection);
+        //                cmdInsertOrden.Parameters.AddWithValue("@Fecha", DateTime.Now);
+        //                cmdInsertOrden.Parameters.AddWithValue("@NombreCliente", this.nombre);
+
+        //                // Obtener el último ID insertado en la tabla Orden
+        //                int ultimoOrdenID = Convert.ToInt32(cmdInsertOrden.ExecuteScalar());
+
+        //                // Insertar en la tabla DetalleOrden 
 
 
+        //                foreach (var producto in this.GetOrden)
+        //                {
+        //                    string queryInsertDetalleOrden = "INSERT INTO DetalleOrden(DetalleID, OrdenID, Producto, Cantidad) VALUES(@DetalleID, @OrdenID, @Producto, @Cantidad);";
+
+        //                    StringBuilder sb = new StringBuilder();
+
+        //                    Dictionary<string, string> dict = new Dictionary<string, string>();
+
+        //                    dict["Producto"] = $"{producto.Key.Nombre}";
+        //                    dict["Producto"] = $"{producto.Key.Condimentos}";
+        //                    dict["Producto"] = $"{producto.Key.Ingredientes}";
+        //                    dict["Producto"] = $"{producto.Key.Precio}";
+        //                    dict["Producto"] = $"{producto.Key.EsVegano}";
 
 
-}
+        //                    SqlCommand cmdInsertDetalleOrden = new SqlCommand(queryInsertDetalleOrden, connection);
+
+
+        //                    cmdInsertDetalleOrden.Parameters.AddWithValue("@OrdenID", ultimoOrdenID);
+        //                    cmdInsertDetalleOrden.Parameters.AddWithValue("@Producto", $"{dict}");
+        //                    cmdInsertDetalleOrden.Parameters.AddWithValue("@Cantidad", producto.Value);
+        //                    cmdInsertDetalleOrden.ExecuteNonQuery();
+
+        //                }
+
+
+        //                connection.Close();
+        //            }
+        //            catch (Exception)
+        //            {
+        //                throw new ErrorDeConexionException("Error de conexión");
+        //            }
+        //        }
+        //    }
+        //}
+
+        public void InsertarOrden()
+        {
+            using (SqlConnection connection = new SqlConnection(GestorSql.ConnectionString))
+            {
+                //try
+                //{
+                    connection.Open();
+
+                    string queryInsertOrden = "INSERT INTO Orden(FechaPedido, NombreCliente) VALUES(@Fecha, @NombreCliente); SELECT SCOPE_IDENTITY();";
+                    SqlCommand cmdInsertOrden = new SqlCommand(queryInsertOrden, connection);
+                    cmdInsertOrden.Parameters.AddWithValue("@Fecha", DateTime.Now);
+                    cmdInsertOrden.Parameters.AddWithValue("@NombreCliente", this.nombre);
+
+                    // Obtener el último ID insertado en la tabla Orden
+                    int ultimoOrdenID = Convert.ToInt32(cmdInsertOrden.ExecuteScalar());
+
+                    string queryInsertDetalleOrden = "INSERT INTO DetalleOrden(OrdenID, Producto) VALUES(@OrdenID, @Producto);";
+                    SqlCommand cmdInsertDetalleOrden = new SqlCommand(queryInsertDetalleOrden, connection);
+
+                    foreach (var producto in this.GetOrden)
+                    {
+                        // Construir una cadena de texto para representar los detalles del producto
+                        string detallesProducto = $"{producto.Nombre}- {producto.Condimentos}- {producto.Ingredientes}- {producto.Precio}- {producto.EsVegano}";
+
+                        // Establecer parámetros para la inserción en DetalleOrden
+                        cmdInsertDetalleOrden.Parameters.Clear();
+                        cmdInsertDetalleOrden.Parameters.AddWithValue("@OrdenID", ultimoOrdenID);
+                        cmdInsertDetalleOrden.Parameters.AddWithValue("@Producto", detallesProducto);
+                        cmdInsertDetalleOrden.ExecuteNonQuery();
+                    }
+
+                    connection.Close();
+                }
+                //catch (Exception)
+                //{
+                //    throw new ErrorDeConexionException("Error de conexión");
+                //}
+            }
+        }
+
+        }
+    
 
 
 //INSERT INTO Orden(OrdenID, FechaPedido, OtrosCampos) VALUES(1, '2023-11-11', 'Alejo');

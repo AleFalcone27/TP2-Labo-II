@@ -1,15 +1,13 @@
 CREATE TABLE Orden (
-    OrdenID INT PRIMARY KEY,
+    OrdenID INT PRIMARY KEY IDENTITY(1,1),
     FechaPedido DATE,
     NombreCliente NVARCHAR(255) 
 );
 
-
 CREATE TABLE DetalleOrden (
-    DetalleID INT PRIMARY KEY,
+    DetalleID INT PRIMARY KEY IDENTITY(1,1),
     OrdenID INT,
-    NombreProducto NVARCHAR(255),
-    Cantidad INT,
+    Producto NVARCHAR(255),
     FOREIGN KEY (OrdenID) REFERENCES Orden(OrdenID)
 );
 

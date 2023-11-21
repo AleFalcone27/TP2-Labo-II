@@ -12,8 +12,6 @@ namespace Entidades
         private bool vegano;
         private static List<Producto> productos;
 
-        private string condimentosAux;
-
         // Constructores
         static Producto()
         {
@@ -28,23 +26,23 @@ namespace Entidades
             this.precio = precio;
             this.vegano = vegano;
 
-            condimentosAux = condimentos;
+
         }
 
         // Getters & Setters
         public string Nombre { get { return this.nombre; } }
         public double Precio { get { return this.precio; } }
 
-        public string CondimentosAux
-        {
-            get { return this.condimentosAux; }
-            set { this.condimentosAux = value; }
-        }
 
         public string Condimentos
         {
             get { return this.condimentos; }
             set { this.condimentos = value; }
+        }
+
+        public bool EsVegano
+        {
+            get { return this.vegano; }
         }
 
 
@@ -81,12 +79,10 @@ namespace Entidades
                         }
                     }
                     return true;
-
                 }
                 catch (Exception ex)
                 {
-                    Console.WriteLine("Error al obtener productos: " + ex.Message);
-                    return false;
+                    throw new ErrorDeConexionException("Error de conexión a la Base de datos"); 
                 }
             }
 

@@ -4,7 +4,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace TestUnitarios
 {
     [TestClass]
-    public class UnitTest1
+    public class UnitTest
     {
         /// <summary>
         /// Solo va a devovler true si encuentra algun registro dentro de la tabla Productos
@@ -14,7 +14,7 @@ namespace TestUnitarios
         {
             bool ret = Producto.GetAndInitializeProducts();
 
-            Assert.IsTrue(ret);
+            Assert.AreEqual(ret,true);
         }
 
         /// <summary>
@@ -23,7 +23,7 @@ namespace TestUnitarios
         [TestMethod]
         public void ResetTotal_deberiaSerCero()
         {
-            Orden orden = new Orden();
+            Orden orden = new Orden("Prueba");
 
             orden.Total = 100;
 

@@ -7,7 +7,8 @@ namespace Vista
     {
 
         private ToolTip toolTip;
-        Orden orden = new Orden(); //MODIFICAR ESTO
+        Orden orden = new Orden("Alejo"); //MODIFICAR ESTO
+
 
         public Form1()
         {
@@ -16,8 +17,17 @@ namespace Vista
 
         public void Form1_Load(object sender, EventArgs e)
         {
-            Producto.GetAndInitializeProducts();
-            CreateProductosUI(Producto.Productos);
+            try
+            {
+                Producto.GetAndInitializeProducts();
+                CreateProductosUI(Producto.Productos);
+            }
+            catch (ErrorDeConexionException ex)
+            {
+                MessageBox.Show(ex.Message);
+                
+            }
+
         }
 
         
@@ -34,18 +44,19 @@ namespace Vista
 
             foreach (var producto in productos)
             {
+                int id = 1;
+
                 // Botones
                 Button button = new Button();
-                button.Click += ProductoButtonClick;
-                button.Text = producto.Nombre;
                 button.Name = producto.Nombre;
+                button.Text = producto.Nombre;
                 button.Height = 100;
                 button.Width = 100;
+                button.Click += ProductoButtonClick;
 
                 // Menu desplegable 
                 ContextMenuStrip menu = new ContextMenuStrip();
-                menu.Items.Add("Quitar condimentos");
-                menu.Items.Add("Agregar condimentos");
+                menu.Items.Add("Detalles");
                 menu.Name = producto.Nombre;
                 button.ContextMenuStrip = menu; // Reemplaza textBox1 con el nombre de tu control
                 menu.ItemClicked += Menu_ItemClicked;
@@ -69,9 +80,6 @@ namespace Vista
             StringBuilder sb = new StringBuilder();
 
             sb.AppendLine("Precio: $" + producto.Precio.ToString());
-            sb.AppendLine("Condimentos: " + producto.Condimentos);
-            sb.Append("Ingredientes: " + producto.Ingredientes);
-
             toolTip.SetToolTip(button, $"{sb}");
         }
 
@@ -80,25 +88,20 @@ namespace Vista
 
         private void Menu_ItemClicked(object? sender, ToolStripItemClickedEventArgs e)
         {
-            MessageBox.Show(sender.ToString());
             
             foreach (Producto producto in Producto.Productos)
             {
-                if (e.ClickedItem.Text == "Quitar condimentos")
+                if (e.ClickedItem.Text == "Detalles")
                 {
                     if (sender.ToString().Contains(producto.Nombre))
                     {
-                        producto.Condimentos = String.Empty;
-                    }
+                        StringBuilder info = new StringBuilder();
+                        info.AppendLine(producto.Nombre);
+                        info.AppendLine("- Condimentos: " + producto.Condimentos);
+                        info.AppendLine("- Ingredientes: " + producto.Ingredientes);
 
-                }
-                else
-                {
-                    if (sender.ToString().Contains(producto.Nombre))
-                    {
-                        producto.Condimentos = producto.CondimentosAux;
+                        MessageBox.Show(info.ToString());
                     }
-
                 }
             }
         }
@@ -133,7 +136,7 @@ namespace Vista
                 Label label = new Label();
                 label.Width = flowLayoutPanelOrden.Width;
                 StringBuilder sb = new StringBuilder();
-                sb.Append($"{item.Key.Nombre} x{item.Value}    {item.Key.Precio}");
+                sb.Append($"{item.Nombre}: {item.Precio}");
                 label.Text = sb.ToString();
 
                 flowLayoutPanelOrden.Controls.Add(label);
@@ -161,7 +164,7 @@ namespace Vista
 
         private void btnCargarOrden_Click(object sender, EventArgs e)
         {
-            orden.insertOrden();
+            orden.InsertarOrden();
         }
 
 
