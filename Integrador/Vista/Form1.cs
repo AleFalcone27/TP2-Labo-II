@@ -7,32 +7,32 @@ namespace Vista
     {
 
         private ToolTip toolTip;
-        Orden orden = new Orden("Alejo"); //MODIFICAR ESTO
 
+        Orden orden = new Orden("Alejo"); //MODIFICAR ESTO
 
         public Form1()
         {
             InitializeComponent();
         }
 
-        public void Form1_Load(object sender, EventArgs e)
+
+        public void Form1_Load(object? sender, EventArgs e)
         {
             try
             {
                 Producto.GetAndInitializeProducts();
-                CreateProductosUI(Producto.Productos);
+                this.CreateProductosUI(Producto.Productos);
+                
             }
             catch (ErrorDeConexionException ex)
             {
                 MessageBox.Show(ex.Message);
-                
             }
-
         }
+
 
         
         /*  PRODUCTOS  */
-
         public void CreateProductosUI(List<Producto> productos)
         {
 
@@ -44,8 +44,6 @@ namespace Vista
 
             foreach (var producto in productos)
             {
-                int id = 1;
-
                 // Botones
                 Button button = new Button();
                 button.Name = producto.Nombre;
@@ -58,7 +56,7 @@ namespace Vista
                 ContextMenuStrip menu = new ContextMenuStrip();
                 menu.Items.Add("Detalles");
                 menu.Name = producto.Nombre;
-                button.ContextMenuStrip = menu; // Reemplaza textBox1 con el nombre de tu control
+                button.ContextMenuStrip = menu; 
                 menu.ItemClicked += Menu_ItemClicked;
 
                 // Descripcion
@@ -72,7 +70,7 @@ namespace Vista
             groupBoxProductos.Controls.Add(flowLayoutPanelOrden);
             this.Controls.Add(groupBoxProductos);
         }
-       
+      
         private void InitializeToolTip(Producto producto, Button button)
         {
             toolTip = new ToolTip();
@@ -85,10 +83,8 @@ namespace Vista
 
 
         // Menu desplegable 
-
         private void Menu_ItemClicked(object? sender, ToolStripItemClickedEventArgs e)
         {
-            
             foreach (Producto producto in Producto.Productos)
             {
                 if (e.ClickedItem.Text == "Detalles")
@@ -105,6 +101,9 @@ namespace Vista
                 }
             }
         }
+
+
+
         private void ProductoButtonClick(object? sender, EventArgs e)
         {
 
@@ -125,10 +124,9 @@ namespace Vista
 
 
         /* ORDEN */
-
         public void CreateOrdenUI()
         {
-            flowLayoutPanelOrden.Controls.Clear();
+            
 
             foreach (var item in orden.GetOrden)
             {
@@ -140,7 +138,6 @@ namespace Vista
                 label.Text = sb.ToString();
 
                 flowLayoutPanelOrden.Controls.Add(label);
-
             }
 
             Label labelSeparador = new Label();
@@ -164,12 +161,20 @@ namespace Vista
 
         private void btnCargarOrden_Click(object sender, EventArgs e)
         {
+            bool result;
+
             orden.InsertarOrden();
+            if (orden.ImprimirTicket())
+            {
+                MessageBox.Show("Imprimiendo Ticket");
+            }
+            else MessageBox.Show("Error al imprimir Ticket");
+
+            flowLayoutPanelOrden.Controls.Clear();
+            orden.GetOrden.Clear();
+            orden.ResetTotal();
+            
         }
-
-
-
-
 
 
         private void btnDeleteOrden_Click(object sender, EventArgs e)
@@ -180,11 +185,19 @@ namespace Vista
         }
 
        
-
         private void btnNuevoProducto_Click(object sender, EventArgs e)
         {
             FormNuevoProducto formNuevoProducto = new FormNuevoProducto();
+            this.Controls.Clear();
+            Producto.Productos.Clear();
+            //BORRAR LOS PRODUCTOS Y DESPUES VOLVER A CLREARLOS
+
+            formNuevoProducto.FormClosed += Form1_Load;
             formNuevoProducto.Show();
         }
+
+
+
+
     }
 }

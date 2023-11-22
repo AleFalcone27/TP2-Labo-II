@@ -27,15 +27,17 @@ namespace Vista
         }
 
 
-        // Agregar alguna excepción
+
         private void btnAgregar_Click(object sender, EventArgs e)
         {
 
             if (float.TryParse(txtPrecio.Text, out float precio))
             {
-                Producto nuevoProducto = new Producto(txtNombre.Text, txtIngredientes.Text, precio, txtCondimentos.Text , this.isVegan);
-                Producto.insertProducts(nuevoProducto);
-                MessageBox.Show("Se agrego correcatemnte");
+                Producto nuevoProducto = new Producto(txtNombre.Text, txtIngredientes.Text, precio, txtCondimentos.Text, this.isVegan);
+                Producto.insertProductsInDB(nuevoProducto);
+                Producto.Productos.Add(nuevoProducto);
+                //Create productos ui
+                MessageBox.Show("Se agrego correctamente");
             }
             else
             {
@@ -52,6 +54,12 @@ namespace Vista
         private void rbtnVeganoNo_CheckedChanged(object sender, EventArgs e)
         {
             isVegan = false;
+        }
+
+        private void FormNuevoProducto_FormClosing(object sender, FormClosingEventArgs e)
+        {
+
+           
         }
     }
 }

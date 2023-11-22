@@ -11,6 +11,7 @@ namespace Entidades
         private double precio;
         private bool vegano;
         private static List<Producto> productos;
+        private static bool flag = true;
 
         // Constructores
         static Producto()
@@ -75,21 +76,23 @@ namespace Entidades
                             bool vegano = reader.GetBoolean(5);
 
                             Producto producto = new Producto(nombre, ingredientes, precio, condimentos, vegano);
-                            Producto.productos.Add(producto);
+
+                            Producto.Productos.Add(producto);
                         }
+                        return true;
                     }
-                    return true;
                 }
+
                 catch (Exception ex)
                 {
-                    throw new ErrorDeConexionException("Error de conexión a la Base de datos"); 
+                throw new ErrorDeConexionException("Error de conexión a la Base de datos");
                 }
             }
-
+            return false;
         }
 
 
-        public static bool insertProducts(Producto producto)
+        public static bool insertProductsInDB(Producto producto)
         {
             using (SqlConnection connection = new SqlConnection(GestorSql.ConnectionString))
             {
@@ -124,11 +127,20 @@ namespace Entidades
             this.ingredientes = string.Empty;
         }
 
-        // CRREAR QUERY PARA OBTENER LOS CONDIMENTOS DE UN PRODUCTO 
 
 
 
-        // Sobrecarga de operadores
+        // SOBRECARGAS //
+
+       
+
+        public override int GetHashCode()
+        {
+            return Nombre.GetHashCode(); 
+        }
+
+
+
         /// <summary>
         /// Compara entre el nombre de una instancia de Producto y un string
         /// </summary>
@@ -140,9 +152,16 @@ namespace Entidades
             return p1.Nombre == p2;
         }
 
+        // Sobrecarga de operadores
+        /// <summary>
+        /// Compara entre el nombre de una instancia de Producto y un string
+        /// </summary>
+        /// <param name="p1"></param>
+        /// <param name="p2"></param>
+        /// <returns>True si el nombre del producto es igual al string, caso contrario False</returns>
         public static bool operator !=(Producto p1, string p2)
         {
-            return p1.Nombre == p2;
+            return p1.Nombre != p2;
         }
 
 

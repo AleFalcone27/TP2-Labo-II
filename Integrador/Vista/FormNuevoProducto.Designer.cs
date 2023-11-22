@@ -130,6 +130,7 @@ namespace Vista
             Controls.Add(txtNombre);
             Name = "FormNuevoProducto";
             Text = "Nuevo producto";
+            FormClosing += FormNuevoProducto_FormClosing;
             Load += FormNuevoProducto_Load;
             ResumeLayout(false);
             PerformLayout();

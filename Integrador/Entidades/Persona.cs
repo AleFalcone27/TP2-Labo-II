@@ -22,10 +22,5 @@ namespace Entidades
 
         abstract public string GetNombre { get; }
         abstract public string GetPrecioTotal { get; }
-
-
     }
-
-
-
 }

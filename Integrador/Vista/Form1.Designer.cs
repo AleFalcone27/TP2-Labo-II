@@ -89,7 +89,7 @@
             btnCargarOrden.Name = "btnCargarOrden";
             btnCargarOrden.Size = new Size(116, 25);
             btnCargarOrden.TabIndex = 4;
-            btnCargarOrden.Text = "Cargar";
+            btnCargarOrden.Text = "Finaliza pedido";
             btnCargarOrden.UseVisualStyleBackColor = true;
             btnCargarOrden.Click += btnCargarOrden_Click;
             // 
@@ -114,7 +114,7 @@
             Controls.Add(groupBoxOrden);
             Controls.Add(groupBoxProductos);
             Name = "Form1";
-            Text = "Form1";
+            Text = "Cajero";
             Load += Form1_Load;
             groupBoxProductos.ResumeLayout(false);
             groupBoxOrden.ResumeLayout(false);
