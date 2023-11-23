@@ -25,5 +25,5 @@
 
 --- 
 
-![Mira el instructivo](instructivo.pdf)
+[Mira la consigna](instructivo.pdf)
 
