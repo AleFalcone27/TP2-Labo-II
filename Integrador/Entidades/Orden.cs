@@ -60,8 +60,8 @@ namespace Entidades
         {
             using (SqlConnection connection = new SqlConnection(GestorSql.ConnectionString))
             {
-                //try
-                //{
+                try
+                {
                     connection.Open();
 
                     string queryInsertOrden = "INSERT INTO Orden(FechaPedido, NombreCliente) VALUES(@Fecha, @NombreCliente); SELECT SCOPE_IDENTITY();";
@@ -88,11 +88,11 @@ namespace Entidades
                     }
 
                     connection.Close();
-                //}
-                //catch (Exception)
-                //{
-                //    throw new ErrorDeConexionException("Error de conexión");
-                //}
+                }
+                catch (Exception)
+                {
+                    throw new ErrorDeConexionException("Error de conexión");
+                }
             }
         }
 
@@ -220,9 +220,3 @@ namespace Entidades
 }
 
 
-
-
-
-//INSERT INTO Orden(OrdenID, FechaPedido, OtrosCampos) VALUES(1, '2023-11-11', 'Alejo');
-//INSERT INTO DetalleOrden(DetalleID, OrdenID, NombreProducto, Cantidad) VALUES(1, 1, 'Producto A', 5);
-//INSERT INTO DetalleOrden(DetalleID, OrdenID, NombreProducto, Cantidad) VALUES(2, 1, 'Producto B', 10);
