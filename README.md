@@ -25,5 +25,5 @@
 
 --- 
 
-![Mira el instructivo](Preview.gif)
+![Mira el instructivo](instructivo.pdf)
 
