@@ -22,3 +22,8 @@
 - Interfazes Para poder iterar la lista de orden generica
 - FLowLayoutPanel para ordenar la generación dinamica de elementos en la UI
 - Tooltip para que con solo pasar el mouse por sobre los productos obtengamos el precio 
+
+--- 
+
+![Mira el instructivo](Preview.gif)
+
