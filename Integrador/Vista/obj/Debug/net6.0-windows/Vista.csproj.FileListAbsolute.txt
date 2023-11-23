@@ -33,7 +33,6 @@ C:\Users\aleef\OneDrive\Escritorio\2do Cuatri\TP2-Labo-II\Integrador\Vista\bin\D
 C:\Users\aleef\OneDrive\Escritorio\2do Cuatri\TP2-Labo-II\Integrador\Vista\bin\Debug\net6.0-windows\Entidades.dll
 C:\Users\aleef\OneDrive\Escritorio\2do Cuatri\TP2-Labo-II\Integrador\Vista\bin\Debug\net6.0-windows\Entidades.pdb
 C:\Users\aleef\OneDrive\Escritorio\2do Cuatri\TP2-Labo-II\Integrador\Vista\obj\Debug\net6.0-windows\Vista.csproj.AssemblyReference.cache
-C:\Users\aleef\OneDrive\Escritorio\2do Cuatri\TP2-Labo-II\Integrador\Vista\obj\Debug\net6.0-windows\Vista.Form1.resources
 C:\Users\aleef\OneDrive\Escritorio\2do Cuatri\TP2-Labo-II\Integrador\Vista\obj\Debug\net6.0-windows\Vista.FormNuevoProducto.resources
 C:\Users\aleef\OneDrive\Escritorio\2do Cuatri\TP2-Labo-II\Integrador\Vista\obj\Debug\net6.0-windows\Vista.csproj.GenerateResource.cache
 C:\Users\aleef\OneDrive\Escritorio\2do Cuatri\TP2-Labo-II\Integrador\Vista\obj\Debug\net6.0-windows\Vista.GeneratedMSBuildEditorConfig.editorconfig
@@ -99,3 +98,5 @@ C:\Users\aleef\OneDrive\Escritorio\2do Cuatri\TP2-Labo-II\Integrador\Vista\bin\D
 C:\Users\aleef\OneDrive\Escritorio\2do Cuatri\TP2-Labo-II\Integrador\Vista\bin\Debug\net6.0-windows\runtimes\win-x86\native\Microsoft.Data.SqlClient.SNI.dll
 C:\Users\aleef\OneDrive\Escritorio\2do Cuatri\TP2-Labo-II\Integrador\Vista\bin\Debug\net6.0-windows\runtimes\win\lib\net6.0\System.Runtime.Caching.dll
 C:\Users\aleef\OneDrive\Escritorio\2do Cuatri\TP2-Labo-II\Integrador\Vista\bin\Debug\net6.0-windows\runtimes\browser\lib\net6.0\System.Text.Encodings.Web.dll
+C:\Users\aleef\OneDrive\Escritorio\2do Cuatri\TP2-Labo-II\Integrador\Vista\obj\Debug\net6.0-windows\Vista.FormCajero.resources
+C:\Users\aleef\OneDrive\Escritorio\2do Cuatri\TP2-Labo-II\Integrador\Vista\obj\Debug\net6.0-windows\Vista.FormIngresarNombreCliente.resources

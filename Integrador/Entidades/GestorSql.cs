@@ -10,7 +10,6 @@
             GestorSql.connectionString = "Server=ALE; Database=SistemaInterno;Trusted_Connection=True;";
         }
 
-
         public static string ConnectionString
         {
             get { return GestorSql.connectionString; }

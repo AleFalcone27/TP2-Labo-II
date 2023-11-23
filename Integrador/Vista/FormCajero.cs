@@ -1,16 +1,17 @@
 using Entidades;
 using System.Text;
+using System.Windows.Forms;
 
 namespace Vista
 {
-    public partial class Form1 : Form
+    public partial class FormCajero : Form
     {
 
         private ToolTip toolTip;
+        Orden orden = new Orden("Cliente"); 
 
-        Orden orden = new Orden("Alejo"); //MODIFICAR ESTO
 
-        public Form1()
+        public FormCajero()
         {
             InitializeComponent();
         }
@@ -20,9 +21,10 @@ namespace Vista
         {
             try
             {
+                this.CenterToScreen();
                 Producto.GetAndInitializeProducts();
                 this.CreateProductosUI(Producto.Productos);
-                
+                FormIngresarNombreClienteInit();
             }
             catch (ErrorDeConexionException ex)
             {
@@ -30,12 +32,15 @@ namespace Vista
             }
         }
 
-
         
         /*  PRODUCTOS  */
+
+        /// <summary>
+        /// Itera la lista de productos y por cada uno genera un boton en la UI y los agrega al groupbox y al flowLayoutPanle
+        /// </summary>
+        /// <param name="productos"></param>
         public void CreateProductosUI(List<Producto> productos)
         {
-
             flowLayoutPanelProductos.FlowDirection = FlowDirection.LeftToRight;
 
             flowLayoutPanelProductos.WrapContents = true;
@@ -71,6 +76,11 @@ namespace Vista
             this.Controls.Add(groupBoxProductos);
         }
       
+        /// <summary>
+        /// Crea el texto de preview cuando pasamos el mousse por sobre los productos en nuestra UI
+        /// </summary>
+        /// <param name="producto"></param>
+        /// <param name="button"></param>
         private void InitializeToolTip(Producto producto, Button button)
         {
             toolTip = new ToolTip();
@@ -82,7 +92,13 @@ namespace Vista
         }
 
 
-        // Menu desplegable 
+        /* MENÚ DESPLEGABLE */
+
+        /// <summary>
+        /// Genera un MessageBox con detalles de cada producto al hacer clicl derecho sobre alguno de de estos en nuestra UI
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Menu_ItemClicked(object? sender, ToolStripItemClickedEventArgs e)
         {
             foreach (Producto producto in Producto.Productos)
@@ -102,8 +118,11 @@ namespace Vista
             }
         }
 
-
-
+        /// <summary>
+        /// Agrega a la orden el producto al cual clikeemos
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ProductoButtonClick(object? sender, EventArgs e)
         {
 
@@ -114,23 +133,25 @@ namespace Vista
                 if (producto == nombreProducto)
                 {
                     orden.AgregarALaOrden(producto);
-                    //MessageBox.Show(producto.Condimentos);
                 }
             }
-
             CreateOrdenUI();
         }
 
 
-
         /* ORDEN */
+
+        /// <summary>
+        /// Itera la lista de orden, la cual contiene todos los elementos que agregamos a la misma y tambien se encarga de 
+        /// mostrar estos cambios en la UI
+        /// </summary>
         public void CreateOrdenUI()
         {
             
+            this.flowLayoutPanelOrden.Controls.Clear();
 
             foreach (var item in orden.GetOrden)
             {
-
                 Label label = new Label();
                 label.Width = flowLayoutPanelOrden.Width;
                 StringBuilder sb = new StringBuilder();
@@ -159,10 +180,13 @@ namespace Vista
 
         }
 
+        /// <summary>
+        /// Muestra un mensaje en relación a la impresión del ticket y limpia la lista de la orden y el total para preparanos para tomar una nueva orden
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnCargarOrden_Click(object sender, EventArgs e)
         {
-            bool result;
-
             orden.InsertarOrden();
             if (orden.ImprimirTicket())
             {
@@ -170,13 +194,23 @@ namespace Vista
             }
             else MessageBox.Show("Error al imprimir Ticket");
 
+            btnDeleteOrden_Click();
+            FormIngresarNombreClienteInit();
+        }
+
+        /// <summary>
+        /// Limpia la UI de la orden, su lista y el total de la misma
+        /// </summary>
+        private void btnDeleteOrden_Click()
+        {
             flowLayoutPanelOrden.Controls.Clear();
             orden.GetOrden.Clear();
             orden.ResetTotal();
-            
         }
 
-
+        /// <summary>
+        /// Limpia la UI de la orden, su lista y el total de la misma
+        /// </summary>
         private void btnDeleteOrden_Click(object sender, EventArgs e)
         {
             flowLayoutPanelOrden.Controls.Clear();
@@ -184,20 +218,38 @@ namespace Vista
             orden.ResetTotal();
         }
 
-       
+
+        /* NUEVO PRODUCTO */
+
+        /// <summary>
+        /// Genera un formulario para cargar un nuevo producto, se encarga de actualizar la UI para que este nuevo producto aparezca en la misma
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnNuevoProducto_Click(object sender, EventArgs e)
         {
-            FormNuevoProducto formNuevoProducto = new FormNuevoProducto();
-            this.Controls.Clear();
+            this.flowLayoutPanelProductos.Controls.Clear();
             Producto.Productos.Clear();
-            //BORRAR LOS PRODUCTOS Y DESPUES VOLVER A CLREARLOS
 
-            formNuevoProducto.FormClosed += Form1_Load;
-            formNuevoProducto.Show();
+            FormNuevoProducto formNuevoProducto = new FormNuevoProducto();
+            formNuevoProducto.ShowDialog();
+
+            Producto.GetAndInitializeProducts();
+            this.CreateProductosUI(Producto.Productos);
         }
 
 
+        /* NUEVA ORDEN */
 
+        /// <summary>
+        /// Crea una instancia de ingresarNombreCliente lo muestra, y guarda el input en nuestra instancia de orden 
+        /// </summary>
+        private void FormIngresarNombreClienteInit()
+        {
+            FormIngresarNombreCliente ingresarNombreCliente = new FormIngresarNombreCliente();
+            ingresarNombreCliente.ShowDialog();
+            orden.Nombre = ingresarNombreCliente.Nombre;
+        }
 
     }
 }

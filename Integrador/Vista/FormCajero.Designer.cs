@@ -1,6 +1,6 @@
 ﻿namespace Vista
 {
-    partial class Form1
+    partial class FormCajero
     {
         /// <summary>
         ///  Required designer variable.
@@ -41,6 +41,7 @@
             // 
             // flowLayoutPanelOrden
             // 
+            flowLayoutPanelOrden.AutoScroll = true;
             flowLayoutPanelOrden.FlowDirection = FlowDirection.TopDown;
             flowLayoutPanelOrden.Location = new Point(6, 12);
             flowLayoutPanelOrden.Name = "flowLayoutPanelOrden";

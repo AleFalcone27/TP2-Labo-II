@@ -2,18 +2,18 @@
 
 namespace Entidades
 {
-    public class Producto : ICondimentos
+    public class Producto 
     {
-        // Campos 
+        /* Atributos */ 
         private string nombre;
         private string ingredientes;
         private string condimentos;
         private double precio;
         private bool vegano;
         private static List<Producto> productos;
-        private static bool flag = true;
 
-        // Constructores
+        /* Constructores */
+
         static Producto()
         {
             Producto.productos = new List<Producto>();
@@ -26,33 +26,40 @@ namespace Entidades
             this.ingredientes = ingredientes;
             this.precio = precio;
             this.vegano = vegano;
-
-
         }
 
-        // Getters & Setters
+        /* Getters & Setters */
+
         public string Nombre { get { return this.nombre; } }
         public double Precio { get { return this.precio; } }
 
-
+ 
         public string Condimentos
         {
             get { return this.condimentos; }
             set { this.condimentos = value; }
         }
 
+
         public bool EsVegano
         {
             get { return this.vegano; }
         }
 
-
+  
         public string Ingredientes { get { return this.ingredientes; } }
+
+   
         public static List<Producto> Productos { get { return productos; } }
 
 
+        /* Métodos */
 
-        // Métodos
+        /// <summary>
+        /// Levanta de la base de datos todos los registros, crea instancias de Producto y los agrega a una lista
+        /// </summary>
+        /// <returns> True si pudo generar la conexión, de lo contrario False</returns>
+        /// <exception cref="ErrorDeConexionException"></exception>
         public static bool GetAndInitializeProducts()
         {
             using (SqlConnection connection = new SqlConnection(GestorSql.ConnectionString))
@@ -91,7 +98,11 @@ namespace Entidades
             return false;
         }
 
-
+        /// <summary>
+        /// Inserta productos en la base de datos
+        /// </summary>
+        /// <param name="producto"></param>
+        /// <returns> True si pudo insertarlos, de lo contrario False</returns>
         public static bool insertProductsInDB(Producto producto)
         {
             using (SqlConnection connection = new SqlConnection(GestorSql.ConnectionString))
@@ -119,24 +130,6 @@ namespace Entidades
                     return false;
                 }
             }
-        }
-
-
-        public void QuitarCondimentos()
-        {
-            this.ingredientes = string.Empty;
-        }
-
-
-
-
-        // SOBRECARGAS //
-
-       
-
-        public override int GetHashCode()
-        {
-            return Nombre.GetHashCode(); 
         }
 
 

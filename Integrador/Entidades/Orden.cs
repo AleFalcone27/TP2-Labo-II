@@ -5,17 +5,17 @@ namespace Entidades
 {
     public class Orden
     {
-        private List<Producto> ListOrden;
+        private GenericList<Producto> ListOrden;
         private double total;
         private string nombre;
 
         public Orden(string nombre)
         {
-            this.ListOrden = new List<Producto>();
+            this.ListOrden = new GenericList<Producto>();
             this.nombre = nombre;
         }
 
-        public List<Producto> GetOrden
+        public GenericList<Producto> GetOrden
         {
             get { return this.ListOrden; }
             set { this.ListOrden = value; }
@@ -24,6 +24,7 @@ namespace Entidades
         public string Nombre
         {
             get { return this.nombre; }
+            set { this.nombre = value; }
         }
 
 
@@ -52,93 +53,15 @@ namespace Entidades
 
         public void AgregarALaOrden(Producto productoAAgregar)
         {
-
-
             this.ListOrden.Add(productoAAgregar);
-
-            //if (this.dictOrden.Count == 0)
-            //{
-
-            //    this.dictOrden.Add(productoAAgregar, 1);
-            //}
-            //else
-            //{
-
-            //    if (this.dictOrden.ContainsKey(productoAAgregar))
-            //    {
-
-            //        int cantItems = this.dictOrden[productoAAgregar];
-            //        this.dictOrden[productoAAgregar] = cantItems + 1;
-            //    }
-            //    else
-            //    {
-            //        this.dictOrden.Add(productoAAgregar, 1);
-            //    }
-            //}
         }
-
-
-        //    public void InsertarOrden()
-        //    {
-        //        using (SqlConnection connection = new SqlConnection(GestorSql.ConnectionString))
-        //        {
-        //            try
-        //            {
-        //                connection.Open();
-
-        //                string queryInsertOrden = "INSERT INTO Orden(FechaPedido, NombreCliente) VALUES(@Fecha, @NombreCliente); SELECT SCOPE_IDENTITY();";
-        //                SqlCommand cmdInsertOrden = new SqlCommand(queryInsertOrden, connection);
-        //                cmdInsertOrden.Parameters.AddWithValue("@Fecha", DateTime.Now);
-        //                cmdInsertOrden.Parameters.AddWithValue("@NombreCliente", this.nombre);
-
-        //                // Obtener el último ID insertado en la tabla Orden
-        //                int ultimoOrdenID = Convert.ToInt32(cmdInsertOrden.ExecuteScalar());
-
-        //                // Insertar en la tabla DetalleOrden 
-
-
-        //                foreach (var producto in this.GetOrden)
-        //                {
-        //                    string queryInsertDetalleOrden = "INSERT INTO DetalleOrden(DetalleID, OrdenID, Producto, Cantidad) VALUES(@DetalleID, @OrdenID, @Producto, @Cantidad);";
-
-        //                    StringBuilder sb = new StringBuilder();
-
-        //                    Dictionary<string, string> dict = new Dictionary<string, string>();
-
-        //                    dict["Producto"] = $"{producto.Key.Nombre}";
-        //                    dict["Producto"] = $"{producto.Key.Condimentos}";
-        //                    dict["Producto"] = $"{producto.Key.Ingredientes}";
-        //                    dict["Producto"] = $"{producto.Key.Precio}";
-        //                    dict["Producto"] = $"{producto.Key.EsVegano}";
-
-
-        //                    SqlCommand cmdInsertDetalleOrden = new SqlCommand(queryInsertDetalleOrden, connection);
-
-
-        //                    cmdInsertDetalleOrden.Parameters.AddWithValue("@OrdenID", ultimoOrdenID);
-        //                    cmdInsertDetalleOrden.Parameters.AddWithValue("@Producto", $"{dict}");
-        //                    cmdInsertDetalleOrden.Parameters.AddWithValue("@Cantidad", producto.Value);
-        //                    cmdInsertDetalleOrden.ExecuteNonQuery();
-
-        //                }
-
-
-        //                connection.Close();
-        //            }
-        //            catch (Exception)
-        //            {
-        //                throw new ErrorDeConexionException("Error de conexión");
-        //            }
-        //        }
-        //    }
-        //}
 
         public void InsertarOrden()
         {
             using (SqlConnection connection = new SqlConnection(GestorSql.ConnectionString))
             {
-                try
-                {
+                //try
+                //{
                     connection.Open();
 
                     string queryInsertOrden = "INSERT INTO Orden(FechaPedido, NombreCliente) VALUES(@Fecha, @NombreCliente); SELECT SCOPE_IDENTITY();";
@@ -165,15 +88,87 @@ namespace Entidades
                     }
 
                     connection.Close();
-                }
-                catch (Exception)
-                {
-                    throw new ErrorDeConexionException("Error de conexión");
-                }
+                //}
+                //catch (Exception)
+                //{
+                //    throw new ErrorDeConexionException("Error de conexión");
+                //}
             }
         }
 
+        private List<string> GetOrdenFromDB()
+        {
+            using (SqlConnection connection = new SqlConnection(GestorSql.ConnectionString))
+            {
+                try
+                {
+                    string query = "SELECT TOP 1 * FROM Orden ORDER BY OrdenID DESC;";
+                    SqlCommand command = new SqlCommand(query, connection);
 
+                    connection.Open();
+
+                    SqlDataReader reader = command.ExecuteReader();
+
+                    List<string> result = new List<string>();
+
+                    if (reader.HasRows)
+                    {
+                        while (reader.Read())
+                        {
+                            result.Add(reader.GetInt32(0).ToString());
+                            result.Add(reader.GetDateTime(1).ToString());
+                            result.Add(reader.GetString(2).ToString());
+                        }
+                        return result;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    throw new ErrorDeConexionException("Error de conexión a la base de datos");
+                }
+                return new List<string>();
+            }
+        }
+
+        private List<string> GetDetallesOrdenFromDB(int id)
+        {
+            using (SqlConnection connection = new SqlConnection(GestorSql.ConnectionString))
+            {
+                try
+                {
+                    string query = $"SELECT * FROM DetalleOrden WHERE OrdenId = {id};";
+                    SqlCommand command = new SqlCommand(query, connection);
+
+                    connection.Open();
+
+                    SqlDataReader reader = command.ExecuteReader();
+
+                    List<string> result = new List<string>();
+
+                    if (reader.HasRows)
+                    {
+                        while (reader.Read())
+                        {
+                            //result.Add(reader.GetInt32(0).ToString());
+                            //result.Add(reader.GetInt32(1).ToString());
+
+                            string producto = reader.GetString(2);
+
+                            string[] palabras = producto.Split('-');
+
+                            result.Add(palabras[0]);
+
+                        }
+                        return result;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    throw new ErrorDeConexionException("Error de conexión a la base de datos");
+                }
+                return null;
+            }
+        }
 
         public bool ImprimirTicket()
         {
@@ -183,21 +178,14 @@ namespace Entidades
             listaOrden = GetOrdenFromDB();
             listaDetalleOrden = GetDetallesOrdenFromDB(int.Parse(listaOrden[0]));
 
-            string directorioActual = Directory.GetCurrentDirectory();
-            string rutaRelativa = Path.Combine(directorioActual, "Tickets");
+            // La ruta relativa no me funciona
 
-            string nombreArchivo = $"ticket{ListOrden[0]}.txt";
-            string rutaArchivo = Path.Combine(rutaRelativa, nombreArchivo);
-
+            string directorioActual = @"C:\Users\aleef\OneDrive\Escritorio\2do Cuatri\TP2-Labo-II\Integrador\Tickets";
+            string rutaRelativa = Path.Combine(directorioActual, $"TicketOrdenNro_{listaOrden[0]}.txt");
 
             try
             {
-                if (!Directory.Exists(rutaRelativa))
-                {
-                    Directory.CreateDirectory(rutaRelativa);
-                }
-
-                using (StreamWriter writer = new StreamWriter(rutaArchivo))
+                using (StreamWriter writer = new StreamWriter(rutaRelativa))
                 {
                     writer.WriteLine("-----------------------------------");
                     writer.WriteLine($"Fecha de compra: {listaOrden[1]}");
@@ -217,6 +205,8 @@ namespace Entidades
                         writer.WriteLine("Sin detalles de productos.");
                     }
 
+                    writer.WriteLine($"Total: {this.Total}");
+
                     writer.WriteLine("-----------------------------------");
                     return true;
                 }
@@ -225,81 +215,7 @@ namespace Entidades
             {
                 throw new Exception("Error al imprimir el ticket", ex);
             }
-            return false;
         }
-
-
-        private List<string> GetOrdenFromDB()
-        {
-            using (SqlConnection connection = new SqlConnection(GestorSql.ConnectionString))
-            {
-                //try
-                //{
-                string query = "SELECT TOP 1 * FROM Orden ORDER BY OrdenID DESC;";
-                SqlCommand command = new SqlCommand(query, connection);
-
-                connection.Open();
-
-                SqlDataReader reader = command.ExecuteReader();
-
-                List<string> result = new List<string>();
-
-                if (reader.HasRows)
-                {
-                    while (reader.Read())
-                    {
-                        result.Add(reader.GetInt32(0).ToString());
-                        result.Add(reader.GetDateTime(1).ToString());
-                        result.Add(reader.GetString(2).ToString());
-                    }
-                    return result;
-                }
-                //}
-                //catch (Exception ex)
-                //{
-                //    throw new ErrorDeConexionException("Error de conexión a la base de datos");
-                //}
-                return result;
-            }
-
-        }
-
-        private List<string> GetDetallesOrdenFromDB(int id)
-        {
-            using (SqlConnection connection = new SqlConnection(GestorSql.ConnectionString))
-            {
-                //try
-                //{
-                string query = $"SELECT * FROM DetalleOrden WHERE OrdenId = {id};";
-                SqlCommand command = new SqlCommand(query, connection);
-
-                connection.Open();
-
-                SqlDataReader reader = command.ExecuteReader();
-
-                List<string> result = new List<string>();
-
-                if (reader.HasRows)
-                {
-                    while (reader.Read())
-                    {
-                        result.Add(reader.GetInt32(0).ToString());
-                        result.Add(reader.GetInt32(1).ToString());
-                        result.Add(reader.GetString(2));
-                    }
-                    return result;
-                }
-                //}
-                //catch (Exception ex)
-                //{
-                //    throw new ErrorDeConexionException("Error de conexión a la base de datos");
-                //}
-            }
-            return null;
-        }
-
-
-
     }
 }
 

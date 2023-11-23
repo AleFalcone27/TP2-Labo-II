@@ -2,10 +2,13 @@
 Fecha de compra: 22/11/2023 00:00:00
 Nombre del cliente: Alejo
 Productos:
-- 43
-- 24
-- Choripán- Chimichurri, salsa criolla- Chorizo, pan- 8,25- False
-- 44
-- 24
+- 45
+- 25
 - Ñoquis- Salsa de tomate, pesto- Papas, harina, salsa a elección- 10- True
+- 46
+- 25
+- Choripán- Chimichurri, salsa criolla- Chorizo, pan- 8,25- False
+- 47
+- 25
+- Tarta de carne- Pimentón, comino- Carne picada, cebolla, pimiento- 13,99- False
 -----------------------------------
