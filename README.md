@@ -3,7 +3,7 @@
 ## Este proyecto emula el funcionamiento de un sistema de cajero para una cadena de comida rapida o restaurante 🍟
 
 ## Preview👀
-![Preview]("Preview.gif")
+![Preview]("C:\Users\aleef\OneDrive\Escritorio\2do Cuatri\TP2-Labo-II\Preview.gif")
 
 ## Funcionalidades principales 🔧
 - Crear una orden con sus productos
