@@ -3,7 +3,7 @@
 ## Este proyecto emula el funcionamiento de un sistema de cajero para una cadena de comida rapida o restaurante 🍟
 
 ## Preview👀
-![Preview]("PreviewGif.gif")
+![Preview]("Preview.gif")
 
 ## Funcionalidades principales 🔧
 - Crear una orden con sus productos
