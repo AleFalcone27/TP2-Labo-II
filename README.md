@@ -2,7 +2,6 @@
 ---
 ## Este proyecto emula el funcionamiento de un sistema de cajero para una cadena de comida rapida o restaurante 🍟
 
-## Preview👀
 ![Preview](Preview.gif)
 
 ## Funcionalidades principales 🔧
